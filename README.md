@@ -4,6 +4,8 @@ This is an example project using a Unity3D client and a custom server applicatio
 
 I created and tested this on Windows 10, but I'm not using any particular platform-specific code, so I imagine it wouldn't be too difficult to get it working on Mac or Linux if you wanted to.
 
+![Screenshot of the client and server console](dotnetexample.jpg)
+
 You will need:
 
 * [Unity3D 5.3.5f1](http://unity3d.com/unity/whats-new/unity-5.3.5)
@@ -38,6 +40,12 @@ Communication between the client and server uses a custom binary protocol over T
 For simplicity, the client and server share code in a few assemblies. This is mostly the message formats, serialization/deserialization, and basic game structures. There's no hard requirement to sharing this code, but it makes things a lot easier if the client is written in C# like the server (as is the case with the Unity3D example client).
 
 You can find these assembles in the Assets/Scripts/Imports folder. If you make material updates to the Example.GameStructures or Example.Messages projects in the server, you'll need to copy the new assemblies to the Imports folder in the client.
+
+If you change any of the protocol buffer contracts, you'll also need to do one more step. Locate the server executable that you compiled, and execute it with this parameter:
+
+    ServerConsole.exe --serializers
+
+This will generate a new Example.Serializer.dll assembly that you will need to copy into the Imports folder as well.
 
 # It's Incomplete
 
